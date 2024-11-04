@@ -35,3 +35,12 @@ func FindTodoIndexById(id int, list TodoList) int {
 	}
 	return -1
 }
+
+func FindTodoIndexByTask(task string, list TodoList) int {
+	for i, v := range list {
+		if task == v.Task {
+			return i
+		}
+	}
+	return -1
+}

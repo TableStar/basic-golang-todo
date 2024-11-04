@@ -33,16 +33,25 @@ func TestAddTodo(t *testing.T) {
 }
 
 func TestFindTodo(t *testing.T) {
+	testList := TodoList{
+		{2, "belajar struct", true},
+		{3, "belajar phyton", false},
+	}
 	t.Run("find index of todo by Id", func(t *testing.T) {
-		testList := TodoList{
-			{2, "belajar struct", true},
-			{3, "belajar phyton", false},
-		}
-
 		todoId := 3
 
 		got := FindTodoIndexById(todoId, testList)
 		want := 1
+		if got != want {
+			t.Errorf("got %d want %d", got, want)
+		}
+	})
+
+	t.Run("find index of todo by task", func(t *testing.T) {
+		todoTask := "belajar struct"
+
+		got := FindTodoIndexByTask(todoTask, testList)
+		want := 0
 		if got != want {
 			t.Errorf("got %d want %d", got, want)
 		}
