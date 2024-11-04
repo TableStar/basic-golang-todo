@@ -27,7 +27,7 @@ func AddTodo(task string, list *TodoList) TodoList {
 // 	*list
 // }
 
-func FindTodoIndex(id int, list TodoList) int {
+func FindTodoIndexById(id int, list TodoList) int {
 	for i, v := range list {
 		if id == v.Id {
 			return i

@@ -41,7 +41,7 @@ func TestFindTodo(t *testing.T) {
 
 		todoId := 3
 
-		got := FindTodoIndex(todoId, testList)
+		got := FindTodoIndexById(todoId, testList)
 		want := 1
 		if got != want {
 			t.Errorf("got %d want %d", got, want)
