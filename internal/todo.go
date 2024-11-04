@@ -8,9 +8,30 @@ type Todo struct {
 
 type TodoList []Todo
 
-func AddTodo(task string, list TodoList) TodoList {
-	newTodo := Todo{Id: len(list) + 1, Task: task, IsDone: false}
+func AddTodo(task string, list *TodoList) TodoList {
+	//because list is a memory address we need *list to do anything with its value
+	var lastId int
+	if len(*list) > 0 {
+		lastId = (*list)[len(*list)-1].Id + 1
+	} else {
+		lastId = 1
+	}
 
-	list = append(list, newTodo)
-	return list
+	newTodo := Todo{Id: lastId, Task: task, IsDone: false}
+
+	*list = append(*list, newTodo)
+	return *list
+}
+
+// func UpdateTodoTask(task string, list *TodoList, id int) TodoList {
+// 	*list
+// }
+
+func FindTodoIndex(id int, list TodoList) int {
+	for i, v := range list {
+		if id == v.Id {
+			return i
+		}
+	}
+	return -1
 }

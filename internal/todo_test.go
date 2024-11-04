@@ -9,7 +9,7 @@ func TestAddTodo(t *testing.T) {
 	t.Run("empty slice", func(t *testing.T) {
 		var testList TodoList
 
-		got := AddTodo("bangun", testList)
+		got := AddTodo("bangun", &testList) //sending memory address to function
 		want := TodoList{Todo{Id: 1, Task: "bangun", IsDone: false}}
 
 		if !reflect.DeepEqual(got, want) {
@@ -17,12 +17,12 @@ func TestAddTodo(t *testing.T) {
 		}
 	})
 	t.Run("slice has one todo", func(t *testing.T) {
-		testList := TodoList{{Id: 1, Task: "belajar struct", IsDone: true}}
+		testList := TodoList{{Id: 2, Task: "belajar struct", IsDone: true}}
 
-		got := AddTodo("belajar phyton", testList)
+		got := AddTodo("belajar phyton", &testList)
 		want := TodoList{
-			{1, "belajar struct", true},
-			{2, "belajar phyton", false},
+			{2, "belajar struct", true},
+			{3, "belajar phyton", false},
 		}
 
 		if !reflect.DeepEqual(got, want) {
@@ -30,4 +30,21 @@ func TestAddTodo(t *testing.T) {
 		}
 	})
 
+}
+
+func TestFindTodo(t *testing.T) {
+	t.Run("find index of todo by Id", func(t *testing.T) {
+		testList := TodoList{
+			{2, "belajar struct", true},
+			{3, "belajar phyton", false},
+		}
+
+		todoId := 3
+
+		got := FindTodoIndex(todoId, testList)
+		want := 1
+		if got != want {
+			t.Errorf("got %d want %d", got, want)
+		}
+	})
 }
